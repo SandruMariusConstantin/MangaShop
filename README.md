@@ -1,0 +1,2 @@
+# MangaShop
+.NET MVC application
