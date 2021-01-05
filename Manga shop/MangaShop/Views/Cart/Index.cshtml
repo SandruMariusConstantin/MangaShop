@@ -1,0 +1,290 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>MangaShop - Sandru's shop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta property="og:title" content="Magazin vanzare manga online" />
+    <meta name="og:description" content="Poti cumpara manga online la un pret foarte redus" />
+    <meta property="og:image" content="~/Content/public/themes/images/logo.jpeg" />
+
+    <link href="~/Content/public/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/public/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="~/Content/public/themes/css/bootstrappage.css" rel="stylesheet" />
+
+
+    <link href="~/Content/public/themes/css/flexslider.css" rel="stylesheet" />
+    <link href="~/Content/public/themes/css/main.css" rel="stylesheet" />
+
+
+    <script src="~/Content/public/themes/js/jquery-1.7.2.min.js"></script>
+    <script src="~/Content/public/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Content/public/themes/js/superfish.js"></script>
+    <script src="~/Content/public/themes/js/jquery.scrolltotop.js"></script>
+</head>
+
+<body>
+    <div id="top-bar" class="container">
+        <div class="row">
+            <div class="span4">
+                <form method="POST" class="search_form">
+                    <input type="text" class="input-block-level search-query" Placeholder="eg. Attack on titan">
+                </form>
+            </div>
+            <div class="span8">
+                <div class="account pull-right">
+                    <ul class="user-menu">
+                        @if (!User.IsInRole("Admin"))
+                        {
+                            <li><a href="@Url.Action("Index", "Users")" id="ascunde" style="display: none">Administrare</a></li>
+                            <li><a href="@Url.Action("Index", "Publisher")" id="ascunde" style="display: none">Publisher</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="@Url.Action("Index", "Users")" id="ascunde" style="display: block">Administrare</a></li>
+                            <li><a href="@Url.Action("Index", "Publisher")" id="ascunde" style="display: block">Publisher</a></li>
+                        }
+
+                        <li>@Html.ActionLink("Acasa", "Index", "Manga")</li>
+                        <li>@Html.ActionLink("Produse", "Products", "Manga")</li>
+                        <li>@Html.ActionLink("Cosul meu", "Index", "Cart")</li>
+                        <li>@Html.ActionLink("Logare", "Login", "Account")</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="wrapper" class="container">
+        <section class="navbar main-menu">
+            <div class="navbar-inner main-menu">
+                <a href="index" class="logo pull-left"><img src="~/Content/public/themes/images/logo.jpeg" class="site_logo" alt=""></a>
+            </div>
+        </section>
+        <section class="header_text sub">
+            <img class="pageBanner" src="~/Content/public/themes/images/banners/banner-2.jpeg" alt="New products">
+            <h4><span>Cosul meu</span></h4>
+        </section>
+
+        <div class="row">
+            <div class="span9">
+                @if (ViewBag.Number == null || ViewBag.Number == 0)
+                {
+                    <h2>Cosul e gol</h2>
+                }
+                else
+                {
+                    var livrare = 0; var lungime = ViewBag.Number;
+                    <h4 class="title"><span class="text"><strong>Cosul</strong> meu</span></h4>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Elimina</th>
+                                <th>Imagine</th>
+                                <th>Numele prosudului</th>
+                                <th>Pret pe unitate</th>
+                            </tr>
+                        </thead>
+
+
+                        <tbody>
+                            @for (var i = 0; i < lungime; i++)
+                            {
+                                <tr>
+                                    <td>
+                                        @using (Html.BeginForm(actionName: "Delete", controllerName: "Cart", method: FormMethod.Post, routeValues: new { id = ViewBag.Manga[i].MangaId }))
+                                        {
+                                            @Html.HttpMethodOverride(HttpVerbs.Delete)
+                                            <button style="margin-right: 5px;
+                                                    background-color: darkslateblue;
+                                                    font-size: 16px;
+                                                    color: white;
+                                                    border: none;
+                                                    padding: 5px 10px;
+                                                    text-align: center;
+                                                    font-size: 16px;
+                                                    margin: 0px 0px;"
+                                                    type="submit">
+                                                Sterge
+                                            </button>
+                                        }
+                                    </td>
+                                    <td>
+                                        @switch (ViewBag.Manga[i].MangaId)
+                                        {
+                                            case 1:
+                                                <a href="@Url.Action("Details", "Manga", new { id = @ViewBag.Manga[i].MangaId })">
+                                                    <img src="~/Content/public/themes/images/manga_images/AttackOnTitan.jpg" alt="" />
+                                                </a>
+                                                break;
+                                            case 2:
+                                                <a href="@Url.Action("Details", "Manga", new { id = @ViewBag.Manga[i].MangaId })">
+                                                    <img src="~/Content/public/themes/images/manga_images/Dr.Stone.jpg" alt="" />
+                                                </a>
+                                                break;
+                                            case 3:
+                                                <a href="@Url.Action("Details", "Manga", new { id = @ViewBag.Manga[i].MangaId })">
+                                                    <img src="~/Content/public/themes/images/manga_images/Kingdom.jpg" alt="" />
+                                                </a>
+                                                break;
+                                            case 4:
+                                                <a href="@Url.Action("Details", "Manga", new { id = @ViewBag.Manga[i].MangaId })">
+                                                    <img src="~/Content/public/themes/images/manga_images/ThePromisedNeverland.jpg" alt="" />
+                                                </a>
+                                                break;
+                                            case 5:
+                                                <a href="@Url.Action("Details", "Manga", new { id = @ViewBag.Manga[i].MangaId })">
+                                                    <img src="~/Content/public/themes/images/manga_images/20th Century Boys.jpg" alt="" />
+                                                </a>
+                                                break;
+                                            case 6:
+                                                <a href="@Url.Action("Details", "Manga", new { id = @ViewBag.Manga[i].MangaId })">
+                                                    <img src="~/Content/public/themes/images/manga_images/Fullmetal Alchemist.jpg" alt="" />
+                                                </a>
+                                                break;
+                                            case 7:
+                                                <a href="@Url.Action("Details", "Manga", new { id = @ViewBag.Manga[i].MangaId })">
+                                                    <img src="~/Content/public/themes/images/manga_images/Monster.jpg" alt="" />
+                                                </a>
+                                                break;
+                                            case 8:
+                                                <a href="@Url.Action("Details", "Manga", new { id = @ViewBag.Manga[i].MangaId })">
+                                                    <img src="~/Content/public/themes/images/manga_images/Vagabond.jpg" alt="" />
+                                                </a>
+                                                break;
+                                            case 9:
+                                                <a href="@Url.Action("Details", "Manga", new { id = @ViewBag.Manga[i].MangaId })">
+                                                    <img src="~/Content/public/themes/images/manga_images/berserk.jpg" alt="" />
+                                                </a>
+                                                break;
+                                            case 10:
+                                                <a href="@Url.Action("Details", "Manga", new { id = @ViewBag.Manga[i].MangaId })">
+                                                    <img src="~/Content/public/themes/images/manga_images/Grand blue.jpg" alt="" />
+                                                </a>
+                                                break;
+                                            case 11:
+                                                <a href="@Url.Action("Details", "Manga", new { id = @ViewBag.Manga[i].MangaId })">
+                                                    <img src="~/Content/public/themes/images/manga_images/OnePiece.jpg" alt="" />
+                                                </a>
+                                                break;
+                                            case 12:
+                                                <a href="@Url.Action("Details", "Manga", new { id = @ViewBag.Manga[i].MangaId })">
+                                                    <img src="~/Content/public/themes/images/manga_images/VinlandSaga.jpg" alt="" />
+                                                </a>
+                                                break;
+                                            case 13:
+                                                <a href="@Url.Action("Details", "Manga", new { id = @ViewBag.Manga[i].MangaId })">
+                                                    <img src="~/Content/public/themes/images/manga_images/GTO.jpg" alt="" />
+                                                </a>
+                                                break;
+                                            case 14:
+                                                <a href="@Url.Action("Details", "Manga", new { id = @ViewBag.Manga[i].MangaId })">
+                                                    <img src="~/Content/public/themes/images/manga_images/HunterxHunter.jpg" alt="" />
+                                                </a>
+                                                break;
+                                            case 15:
+                                                <a href="@Url.Action("Details", "Manga", new { id = @ViewBag.Manga[i].MangaId })">
+                                                    <img src="~/Content/public/themes/images/manga_images/Jojo's bizzare adventure.jpg" alt="" />
+                                                </a>
+                                                break;
+                                            case 16:
+                                                <a href="@Url.Action("Details", "Manga", new { id = @ViewBag.Manga[i].MangaId })">
+                                                    <img src="~/Content/public/themes/images/manga_images/Oyasumi Punpun.jpg" alt="" />
+                                                </a>
+                                                break;
+                                        }
+                                    </td>
+                                    <td>@ViewBag.Manga[i].Title</td>
+                                    <td>@ViewBag.Manga[i].Price  lei</td>
+                                </tr>
+                            }
+
+                            @if (ViewBag.Total > 150)
+                            {
+                                livrare = 50;
+                            }
+
+                            <tr>
+                                <td>Cost livrare: @livrare</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td><strong>Total @(ViewBag.Total + livrare) lei</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+
+                    using (Html.BeginForm(actionName: "Submit", controllerName: "Cart", method: FormMethod.Get))
+                    {
+                        <button style="margin-right: 5px;
+                                                    background-color: darkslateblue;
+                                                    font-size: 16px;
+                                                    color: white;
+                                                    border: none;
+                                                    padding: 5px 5px;
+                                                    text-align: center;
+                                                    font-size: 16px;
+                                                    margin: 0px 0px;
+                                                    position: absolute;
+                                                    left: 50%;
+                                                    -ms-transform: translate(-50%, -50%);
+                                                    transform: translate(-50%, -50%);"
+                                type="submit">
+                            Finalizeaza comanda
+                        </button>
+                    }
+                }
+            </div>
+        </div>
+        <section id="footer-bar">
+            <div class="row">
+                <div class="span3">
+                    <h4>Navigheaza</h4>
+                    <ul class="nav">
+                        <li><a href="./Contact">Contacteaza-ma</a></li>
+                        <li><a href="./index">Acasa</a></li>
+                        <li><a href="./CosulMeu">CosulMeu</a></li>
+                        <li><a href="./Plata">Plata</a></li>
+                        <li><a href="./Logare">Logare</a></li>
+                    </ul>
+                </div>
+                <div class="span4">
+                    <h4>Contul meu</h4>
+                    <ul class="nav">
+                        <li><a href="#">Contul meu</a></li>
+                        <li><a href="#">Istoricul cumparaturilor</a></li>
+                        <li><a href="#">Wish List</a></li>
+                        <li><a href="#">Newsletter</a></li>
+                    </ul>
+                </div>
+                <div class="span5">
+                    <br />
+                    <span class="social_icons">
+                        <a class="facebook" href="#">Facebook</a>
+                        <a class="twitter" href="#">Twitter</a>
+                        <a class="skype" href="#">Skype</a>
+                        <a class="vimeo" href="#">Vimeo</a>
+                    </span>
+                </div>
+            </div>
+        </section>
+        <section id="copyright">
+            <span>Copyright 2020 Sandru Marius-Constantin.</span>
+        </section>
+    </div>
+    <script src="~/Content/public/themes/js/common.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#checkout').click(function (e) {
+                document.location.href = "checkout";
+            })
+        });
+    </script>
+</body>
+</html>

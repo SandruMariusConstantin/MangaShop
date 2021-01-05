@@ -1,0 +1,428 @@
+﻿@model MangaShop.Models.Manga
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>MangaShop - Sandru's shop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta property="og:title" content="Magazin vanzare manga online" />
+    <meta name="og:description" content="Poti cumpara manga online la un pret foarte redus" />
+    <meta property="og:image" content="~/Content/public/themes/images/logo.jpeg" />
+
+    <link href="~/Content/public/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/public/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="~/Content/public/themes/css/bootstrappage.css" rel="stylesheet" />
+
+
+    <link href="~/Content/public/themes/css/flexslider.css" rel="stylesheet" />
+    <link href="~/Content/public/themes/css/main.css" rel="stylesheet" />
+
+
+    <script src="~/Content/public/themes/js/jquery-1.7.2.min.js"></script>
+    <script src="~/Content/public/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Content/public/themes/js/superfish.js"></script>
+    <script src="~/Content/public/themes/js/jquery.scrolltotop.js"></script>
+</head>
+
+<body>
+    <div id="top-bar" class="container">
+        <div class="row">
+            <div class="span4">
+                <form method="POST" class="search_form">
+                    <input type="text" class="input-block-level search-query" Placeholder="eg. Attack on titan">
+                </form>
+            </div>
+            <div class="span8">
+                <div class="account pull-right">
+                    <ul class="user-menu">
+                        @if (!User.IsInRole("Admin"))
+                        {
+                            <li><a href="@Url.Action("Index", "Users")" id="ascunde" style="display: none">Administrare</a></li>
+                            <li><a href="@Url.Action("Index", "Publisher")" id="ascunde" style="display: none">Publisher</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="@Url.Action("Index", "Users")" id="ascunde" style="display: block">Administrare</a></li>
+                            <li><a href="@Url.Action("Index", "Publisher")" id="ascunde" style="display: block">Publisher</a></li>
+                        }
+
+                        <li>@Html.ActionLink("Acasa", "Index", "Manga")</li>
+                        <li>@Html.ActionLink("Produse", "Products", "Manga")</li>
+                        <li>@Html.ActionLink("Cosul meu", "Index", "Cart")</li>
+                        <li>@Html.ActionLink("Logare", "Login", "Account")</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="wrapper" class="container">
+        <section class="navbar main-menu">
+            <div class="navbar-inner main-menu">
+                <a href="index" class="logo pull-left"><img src="~/Content/public/themes/images/logo.jpeg" class="site_logo" alt=""></a>
+            </div>
+        </section>
+        <section class="header_text sub">
+            <img class="pageBanner" src="~/Content/public/themes/images/banners/banner-2.jpeg" alt="New products">
+            <h4><span>Detalii produs</span></h4>
+        </section>
+        <section class="main-content">
+            <div class="row">
+                <div class="span9">
+                    <div class="row">
+                        <div class="span4">
+                            @switch (Model.MangaId)
+                            {
+                                case 1:
+                        <a href="@Url.Action("Details", "Manga", new { id = @Model.MangaId })" class="thumbnail" data-fancybox-group="group1" title="Description 1">
+                            <img src="~/Content/public/themes/images/manga_images/AttackOnTitan.jpg" alt="" />
+                        </a>
+                                    break;
+                                case 2:
+                        <a href="@Url.Action("Details", "Manga", new { id = @Model.MangaId })" class="thumbnail" data-fancybox-group="group1" title="Description 1">
+                            <img src="~/Content/public/themes/images/manga_images/Dr.Stone.jpg" alt="" />
+                        </a>
+                                    break;
+                                case 3:
+                        <a href="@Url.Action("Details", "Manga", new { id = @Model.MangaId })" class="thumbnail" data-fancybox-group="group1" title="Description 1">
+                            <img src="~/Content/public/themes/images/manga_images/Kingdom.jpg" alt="" />
+                        </a>
+                                    break;
+                                case 4:
+                        <a href="@Url.Action("Details", "Manga", new { id = @Model.MangaId })" class="thumbnail" data-fancybox-group="group1" title="Description 1">
+                            <img src="~/Content/public/themes/images/manga_images/ThePromisedNeverland.jpg" alt="" />
+                        </a>
+                                    break;
+                                case 5:
+                        <a href="@Url.Action("Details", "Manga", new { id = @Model.MangaId })" class="thumbnail" data-fancybox-group="group1" title="Description 1">
+                            <img src="~/Content/public/themes/images/manga_images/20th Century Boys.jpg" alt="" />
+                        </a>
+                                    break;
+                                case 6:
+                        <a href="@Url.Action("Details", "Manga", new { id = @Model.MangaId })" class="thumbnail" data-fancybox-group="group1" title="Description 1">
+                            <img src="~/Content/public/themes/images/manga_images/Fullmetal Alchemist.jpg" alt="" />
+                        </a>
+                                    break;
+                                case 7:
+                        <a href="@Url.Action("Details", "Manga", new { id = @Model.MangaId })" class="thumbnail" data-fancybox-group="group1" title="Description 1">
+                            <img src="~/Content/public/themes/images/manga_images/Monster.jpg" alt="" />
+                        </a>
+                                    break;
+                                case 8:
+                        <a href="@Url.Action("Details", "Manga", new { id = @Model.MangaId })" class="thumbnail" data-fancybox-group="group1" title="Description 1">
+                            <img src="~/Content/public/themes/images/manga_images/Vagabond.jpg" alt="" />
+                        </a>
+                                    break;
+                                case 9:
+                        <a href="@Url.Action("Details", "Manga", new { id = @Model.MangaId })" class="thumbnail" data-fancybox-group="group1" title="Description 1">
+                            <img src="~/Content/public/themes/images/manga_images/berserk.jpg" alt="" />
+                        </a>
+                                    break;
+                                case 10:
+                        <a href="@Url.Action("Details", "Manga", new { id = @Model.MangaId })" class="thumbnail" data-fancybox-group="group1" title="Description 1">
+                            <img src="~/Content/public/themes/images/manga_images/Grand blue.jpg" alt="" />
+                        </a>
+                                    break;
+                                case 11:
+                        <a href="@Url.Action("Details", "Manga", new { id = @Model.MangaId })" class="thumbnail" data-fancybox-group="group1" title="Description 1">
+                            <img src="~/Content/public/themes/images/manga_images/OnePiece.jpg" alt="" />
+                        </a>
+                                    break;
+                                case 12:
+                        <a href="@Url.Action("Details", "Manga", new { id = @Model.MangaId })" class="thumbnail" data-fancybox-group="group1" title="Description 1">
+                            <img src="~/Content/public/themes/images/manga_images/VinlandSaga.jpg" alt="" />
+                        </a>
+                                    break;
+                                case 13:
+                        <a href="@Url.Action("Details", "Manga", new { id = @Model.MangaId })" class="thumbnail" data-fancybox-group="group1" title="Description 1">
+                            <img src="~/Content/public/themes/images/manga_images/GTO.jpg" alt="" />
+                        </a>
+                                    break;
+                                case 14:
+                        <a href="@Url.Action("Details", "Manga", new { id = @Model.MangaId })" class="thumbnail" data-fancybox-group="group1" title="Description 1">
+                            <img src="~/Content/public/themes/images/manga_images/HunterxHunter.jpg" alt="" />
+                        </a>
+                                    break;
+                                case 15:
+                        <a href="@Url.Action("Details", "Manga", new { id = @Model.MangaId })" class="thumbnail" data-fancybox-group="group1" title="Description 1">
+                            <img src="~/Content/public/themes/images/manga_images/Jojo's bizzare adventure.jpg" alt="" />
+                        </a>
+                                    break;
+                                case 16:
+                        <a href="@Url.Action("Details", "Manga", new { id = @Model.MangaId })" class="thumbnail" data-fancybox-group="group1" title="Description 1">
+                            <img src="~/Content/public/themes/images/manga_images/Oyasumi Punpun.jpg" alt="" />
+                        </a>
+                                    break;
+                            }
+                        </div>
+                        <div class="span5">
+
+                            <address>
+                                <strong>Numele produsului:</strong> <span>@Model.Title, Vol. @Model.VolumeNumber</span><br>
+                                <strong>Nr de pagini:</strong> <span>@Model.NoOfPages</span><br>
+                                <strong>Stare produs:</strong> <span>In stoc</span><br>
+                                <br />
+
+                                @using (Html.BeginForm(actionName: "Add", controllerName: "Cart", method: FormMethod.Post, routeValues: new { id = Model.MangaId }))
+                                {
+                                    <button style="margin-right: 5px;
+                                                    background-color: darkslateblue;
+                                                    font-size: 16px;
+                                                    color: white;
+                                                    border: none;
+                                                    padding: 5px 10px;
+                                                    text-align: center;
+                                                    font-size: 16px;
+                                                    margin: 0px 0px;"
+                                            type="submit">
+                                        Adauga in cos
+                                    </button>
+                                }
+
+                                @if (User.IsInRole("Publisher") || User.IsInRole("Admin"))
+                                {
+                                    using (Html.BeginForm(actionName: "Edit", controllerName: "Manga", method: FormMethod.Get, routeValues: new { id = Model.MangaId }))
+                                    {
+                                        <button style="margin-right: 5px;
+                                                    background-color: darkslateblue;
+                                                    font-size: 16px;
+                                                    color: white;
+                                                    border: none;
+                                                    padding: 5px 5px;
+                                                    text-align: center;
+                                                    font-size: 16px;
+                                                    margin: 0px 0px;"
+                                                type="submit">
+                                            Modifica produs
+                                        </button>
+                                    }
+
+                                    using (Html.BeginForm(actionName: "Delete", controllerName: "Manga", method: FormMethod.Post, routeValues: new { id = Model.MangaId }))
+                                    {
+                                        @Html.HttpMethodOverride(HttpVerbs.Delete)
+                                        <button style="margin-right: 5px;
+                                                    background-color: darkslateblue;
+                                                    font-size: 16px;
+                                                    color: white;
+                                                    border: none;
+                                                    padding: 5px 10px;
+                                                    text-align: center;
+                                                    font-size: 16px;
+                                                    margin: 0px 0px;"
+                                                type="submit">
+                                            Sterge produs
+                                        </button>
+                                    }
+                                }
+                                       
+                            </address>
+                            @if (Model.Genres.Count > 0)
+                            {
+                                <h4><strong>Genuri: </strong></h4>
+                                <ul>
+                                @foreach (var genre in Model.Genres)
+                                {
+                                    <li>@genre.Name</li>
+                                }
+                                </ul>
+                             }
+                            
+                            <h4><strong>Pret: @Model.Price lei</strong></h4>
+
+                            <p>&nbsp;</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="span9">
+                            <h4>Descriere</h4>
+                            @if (Model.Summary.IsEmpty())
+                            {<div>This book has no summary to print.</div> }
+                            else
+                            {<div>@Model.Summary</div>}
+                        
+                            
+                        </div>
+
+                        <div class="span9">
+                            <br>
+                            <h4 class="title">
+                                <span class="pull-left"><span class="text">Produse <strong>asemanatoare</strong></span></span>
+                                <span class="pull-right">
+                                    <a class="left button" href="#myCarousel-1" data-slide="prev"></a><a class="right button" href="#myCarousel-1" data-slide="next"></a>
+                                </span>
+                            </h4>
+                            <div id="myCarousel-1" class="carousel slide">
+                                <div class="carousel-inner">
+                                    <div class="active item">
+                                        <ul class="thumbnails listing-products">
+                                            <li class="span3">
+                                                <div class="product-box">
+                                                    <span class="sale_tag"></span>
+                                                    <p><a href="@Url.Action("Products", "Manga")"><img src="~/Content/public/themes/images/manga_images/AttackOnTitan.jpg" alt="" /></a></p>
+                                                    <a href="@Url.Action("Products", "Manga")" class="title">Attack on titan</a><br />
+                                                    <a href="@Url.Action("Products", "Manga")" class="category">Vezi produse</a>
+                                                </div>
+                                            </li>
+                                            <li class="span3">
+                                                <div class="product-box">
+                                                    <span class="sale_tag"></span>
+                                                    <p><a href="@Url.Action("Products", "Manga")"><img src="~/Content/public/themes/images/manga_images/HunterxHunter.jpg" alt="" /></a></p>
+                                                    <a href="@Url.Action("Products", "Manga")" class="title">Hunter x Hunter</a><br />
+                                                    <a href="@Url.Action("Products", "Manga")" class="category">Vezi produse</a>
+                                                </div>
+                                            </li>
+                                            <li class="span3">
+                                                <div class="product-box">
+                                                    <p><a href="@Url.Action("Products", "Manga")"><img src="~/Content/public/themes/images/manga_images/berserk.jpg" alt="" /></a></p>
+                                                    <a href="@Url.Action("Products", "Manga")" class="title">Berserk</a><br />
+                                                    <a href="@Url.Action("Products", "Manga")" class="category">Vezi produse</a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="item">
+                                        <ul class="thumbnails listing-products">
+                                            <li class="span3">
+                                                <div class="product-box">
+                                                    <p><a href="@Url.Action("Products", "Manga")"><img src="~/Content/public/themes/images/manga_images/OnePiece.jpg" alt="" /></a></p>
+                                                    <a href="@Url.Action("Products", "Manga")" class="title">One piece</a><br />
+                                                    <a href="@Url.Action("Products", "Manga")" class="category">Vezi produse</a>
+                                                </div>
+                                            </li>
+                                            <li class="span3">
+                                                <div class="product-box">
+                                                    <p><a href="@Url.Action("Products", "Manga")"><img src="~/Content/public/themes/images/manga_images/20th Century Boys.jpg" alt="" /></a></p>
+                                                    <a href="@Url.Action("Products", "Manga")" class="title">20th Century Boys</a><br />
+                                                    <a href="@Url.Action("Products", "Manga")" class="category">Vezi produse</a>
+                                                </div>
+                                            </li>
+                                            <li class="span3">
+                                                <div class="product-box">
+                                                    <p><a href="@Url.Action("Products", "Manga")"><img src="~/Content/public/themes/images/manga_images/ThePromisedNeverland.jpg" alt="" /></a></p>
+                                                    <a href="@Url.Action("Products", "Manga")" class="title">The promised neverland</a><br />
+                                                    <a href="@Url.Action("Products", "Manga")" class="category">Vezi produse</a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="span3 col">
+                    <div class="block">
+                        <ul class="nav nav-list">
+                            <li class="nav-header">SUBCATEGORII</li>
+                            <li>@Html.ActionLink("Shonen manga", "Products", "Manga")</li>
+                            <li>@Html.ActionLink("Josei manga", "Products", "Manga")</li>
+                            <li>@Html.ActionLink("Echi manga", "Products", "Manga")</li>
+                            <li>@Html.ActionLink("Novels", "Products", "Manga")</li>
+                            <li>@Html.ActionLink("Cele mai populare", "Products", "Manga")</li>
+                            <li>@Html.ActionLink("Produse la reducere", "Products", "Manga")</li>
+                        </ul>
+                        <br />
+                        <ul class="nav nav-list below">
+                            <li class="nav-header">Autori</li>
+                            <li>@Html.ActionLink("Ishida Isui", "Products", "Manga")</li>
+                            <li>@Html.ActionLink("Miura Kentaro", "Products", "Manga")</li>
+                            <li>@Html.ActionLink("Yoshihiro Togashi", "Products", "Manga")</li>
+                            <li>@Html.ActionLink("Naoki Urasawa", "Products", "Manga")</li>
+                        </ul>
+                    </div>
+                    <div class="block">
+                        <h4 class="title">
+                            <span class="pull-left"><span class="text">Produse random</span></span>
+                            <span class="pull-right">
+                                <a class="left button" href="#myCarousel" data-slide="prev"></a><a class="right button" href="#myCarousel" data-slide="next"></a>
+                            </span>
+                        </h4>
+                        <div id="myCarousel" class="carousel slide">
+                            <div class="carousel-inner">
+                                <div class="active item">
+                                    <ul class="thumbnails listing-products">
+                                        <li class="span3">
+                                            <div class="product-box">
+                                                <p><a href="@Url.Action("Details", "Manga", new { id = "5" })"><img src="~/Content/public/themes/images/manga_images/20th Century Boys.jpg" alt="" /></a></p>
+                                                <a href="@Url.Action("Details", "Manga", new { id = "5" })" class="title">20th Century Boys</a><br />
+                                                <a href="@Url.Action("Products", "Manga")" class="category">Vezi produse</a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="item">
+                                    <ul class="thumbnails listing-products">
+                                        <li class="span3">
+                                            <div class="product-box">
+                                                <p><a href="@Url.Action("Details", "Manga", new { id = "4" })"><img src="~/Content/public/themes/images/manga_images/ThePromisedNeverland.jpg" alt="" /></a></p>
+                                                <a href="@Url.Action("Details", "Manga", new { id = "4" })" class="title">The promised neverland</a><br />
+                                                <a href="@Url.Action("Products", "Manga")" class="category">Vezi produse</a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="footer-bar">
+            <div class="row">
+                <div class="span3">
+                    <h4>Navigheaza</h4>
+                    <ul class="nav">
+                        <li><a href="./Contact">Contacteaza-ma</a></li>
+                        <li><a href="./index">Acasa</a></li>
+                        <li><a href="./CosulMeu">CosulMeu</a></li>
+                        <li><a href="./Plata">Plata</a></li>
+                        <li><a href="./Logare">Logare</a></li>
+                    </ul>
+                </div>
+                <div class="span4">
+                    <h4>Contul meu</h4>
+                    <ul class="nav">
+                        <li><a href="#">Contul meu</a></li>
+                        <li><a href="#">Istoricul cumparaturilor</a></li>
+                        <li><a href="#">Wish List</a></li>
+                        <li><a href="#">Newsletter</a></li>
+                    </ul>
+                </div>
+                <div class="span5">
+                    <br />
+                    <span class="social_icons">
+                        <a class="facebook" href="#">Facebook</a>
+                        <a class="twitter" href="#">Twitter</a>
+                        <a class="skype" href="#">Skype</a>
+                        <a class="vimeo" href="#">Vimeo</a>
+                    </span>
+                </div>
+            </div>
+        </section>
+        <section id="copyright">
+            <span>Copyright 2020 Sandru Marius-Constantin.</span>
+        </section>
+    </div>
+    <script src="~/Content/public/themes/js/common.js"></script>
+    <script>
+        $(function () {
+            $('#myTab a:first').tab('show');
+            $('#myTab a').click(function (e) {
+                e.preventDefault();
+                $(this).tab('show');
+            })
+        })
+        $(document).ready(function () {
+            $('.thumbnail').fancybox({
+                openEffect: 'none',
+                closeEffect: 'none'
+            });
+
+            $('#myCarousel-2').carousel({
+                interval: 2500
+            });
+        });
+    </script>
+</body>
+</html>

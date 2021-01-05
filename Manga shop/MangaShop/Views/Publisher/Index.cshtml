@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>MangaShop - Sandru's shop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta property="og:title" content="Magazin vanzare manga online" />
+    <meta name="og:description" content="Poti cumpara manga online la un pret foarte redus" />
+    <meta property="og:image" content="~/Content/public/themes/images/logo.jpeg" />
+
+    <link href="~/Content/public/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/public/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="~/Content/public/themes/css/bootstrappage.css" rel="stylesheet" />
+
+
+    <link href="~/Content/public/themes/css/flexslider.css" rel="stylesheet" />
+    <link href="~/Content/public/themes/css/main.css" rel="stylesheet" />
+
+
+    <script src="~/Content/public/themes/js/jquery-1.7.2.min.js"></script>
+    <script src="~/Content/public/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Content/public/themes/js/superfish.js"></script>
+    <script src="~/Content/public/themes/js/jquery.scrolltotop.js"></script>
+</head>
+
+<body>
+    <div id="top-bar" class="container">
+        <div class="row">
+            <div class="span4">
+                <form method="POST" class="search_form">
+                    <input type="text" class="input-block-level search-query" Placeholder="eg. Attack on titan">
+                </form>
+            </div>
+            <div class="span8">
+                <div class="account pull-right">
+                    <ul class="user-menu">
+                        @if (!User.IsInRole("Admin"))
+                        {
+                            <li><a href="@Url.Action("Index", "Users")" id="ascunde" style="display: none">Administrare</a></li>
+                            <li><a href="@Url.Action("Index", "Publisher")" id="ascunde" style="display: none">Publisher</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="@Url.Action("Index", "Users")" id="ascunde" style="display: block">Administrare</a></li>
+                            <li><a href="@Url.Action("Index", "Publisher")" id="ascunde" style="display: block">Publisher</a></li>
+                        }
+
+                        <li>@Html.ActionLink("Acasa", "Index", "Manga")</li>
+                        <li>@Html.ActionLink("Produse", "Products", "Manga")</li>
+                        <li>@Html.ActionLink("Cosul meu", "Index", "Cart")</li>
+                        <li>@Html.ActionLink("Logare", "Login", "Account")</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="wrapper" class="container">
+        <section class="navbar main-menu">
+            <div class="navbar-inner main-menu">
+                <a href="index" class="logo pull-left"><img src="~/Content/public/themes/images/logo.jpeg" class="site_logo" alt=""></a>
+            </div>
+        </section>
+        <section class="header_text sub">
+            <img class="pageBanner" src="~/Content/public/themes/images/banners/banner-2.jpeg" alt="New products">
+            <h4><span>PRODUSE</span></h4>
+        </section>
+
+        <section class="main-content">
+
+            <div class="row">
+                <div class="span9">
+                    <table class="table">
+                        <thead>
+                        <th>Name</th>
+                        <th>Phone Number</th>
+                        <th>Delete</th>
+                        <th>Details</th>
+                        </thead>
+                        <tbody>
+                            @foreach (var publisher in ViewBag.Publishers)
+                            {
+                    <tr>
+                        <td>@publisher.Name</td>
+                        <td>@publisher.ContactInfo.PhoneNumber</td>
+                        <td>
+                            @using (Html.BeginForm(actionName: "Delete", controllerName: "Publisher", method: FormMethod.Post, routeValues: new { id = publisher.PublisherId }))
+                            {
+                                @Html.HttpMethodOverride(HttpVerbs.Delete)
+                                <button style="margin-right: 5px;
+                                                    background-color: darkslateblue;
+                                                    font-size: 16px;
+                                                    color: white;
+                                                    border: none;
+                                                    padding: 5px 10px;
+                                                    text-align: center;
+                                                    font-size: 16px;
+                                                    margin: 0px 0px;"
+                                        type="submit">
+                                    Sterge
+                                </button>
+                            }
+                        </td>
+                        <td>@Html.ActionLink("View More", "Details", new { id = publisher.PublisherId })</td>
+                    </tr>}
+                        </tbody>
+                    </table>
+                    <div>
+                        <br />
+                        @using (Html.BeginForm(actionName: "New", controllerName: "Publisher", method: FormMethod.Get))
+                        {
+                            <button style="margin-right: 5px;
+                                                    background-color: darkslateblue;
+                                                    font-size: 16px;
+                                                    color: white;
+                                                    border: none;
+                                                    padding: 5px 5px;
+                                                    text-align: center;
+                                                    font-size: 16px;
+                                                    margin: 0px 0px;
+                                                    position: absolute;
+                                                    left: 50%;
+                                                    -ms-transform: translate(-50%, -50%);
+                                                    transform: translate(-50%, -50%);"
+                                    type="submit">
+                                Add publisher
+                            </button>
+                        }
+                        <br />
+                        @using (Html.BeginForm(actionName: "New", controllerName: "ContactInfo", method: FormMethod.Get))
+                        {
+                            <button style="margin-right: 5px;
+                                                    background-color: darkslateblue;
+                                                    font-size: 16px;
+                                                    color: white;
+                                                    border: none;
+                                                    padding: 5px 5px;
+                                                    text-align: center;
+                                                    font-size: 16px;
+                                                    margin: 0px 0px;
+                                                    position: absolute;
+                                                    left: 50%;
+                                                    -ms-transform: translate(-50%, -50%);
+                                                    transform: translate(-50%, -50%);"
+                                    type="submit">
+                                Add contact info
+                            </button>
+                        }
+                    </div>
+                    <hr>
+                </div>               
+            </div>
+        </section>
+        <section id="footer-bar">
+            <div class="row">
+                <div class="span3">
+                    <h4>Navigheaza</h4>
+                    <ul class="nav">
+                        <li><a href="./Contact">Contacteaza-ma</a></li>
+                        <li><a href="./index">Acasa</a></li>
+                        <li><a href="./CosulMeu">CosulMeu</a></li>
+                        <li><a href="./Plata">Plata</a></li>
+                        <li><a href="./Logare">Logare</a></li>
+                    </ul>
+                </div>
+                <div class="span4">
+                    <h4>Contul meu</h4>
+                    <ul class="nav">
+                        <li><a href="#">Contul meu</a></li>
+                        <li><a href="#">Istoricul cumparaturilor</a></li>
+                        <li><a href="#">Wish List</a></li>
+                        <li><a href="#">Newsletter</a></li>
+                    </ul>
+                </div>
+                <div class="span5">
+                    <br />
+                    <span class="social_icons">
+                        <a class="facebook" href="#">Facebook</a>
+                        <a class="twitter" href="#">Twitter</a>
+                        <a class="skype" href="#">Skype</a>
+                        <a class="vimeo" href="#">Vimeo</a>
+                    </span>
+                </div>
+            </div>
+        </section>
+        <section id="copyright">
+            <span>Copyright 2020 Sandru Marius-Constantin.</span>
+        </section>
+    </div>
+    <script src="~/Content/public/themes/js/common.js"></script>
+</body>
+
+</html>
